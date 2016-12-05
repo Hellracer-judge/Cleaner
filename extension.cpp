@@ -137,7 +137,9 @@ void Cleaner::SDK_OnUnload()
 		g_pDetour->Destroy();
 
 	delete [] g_szStrings;
+#if SOURCE_ENGINE >= SE_LEFT4DEAD2
 	gameconfs->CloseGameConfigFile(g_pGameConf);
+#endif
 }
 
 void Cleaner::SDK_OnAllLoaded()
