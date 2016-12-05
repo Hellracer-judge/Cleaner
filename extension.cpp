@@ -71,6 +71,7 @@ bool Cleaner::SDK_OnLoad(char *error, size_t maxlength, bool late)
 	}
 	fclose(file);
 
+#if SOURCE_ENGINE >= SE_LEFT4DEAD2
 	char ConfigError[128];
 	if(!gameconfs->LoadGameConfigFile("cleaner", &g_pGameConf, ConfigError, sizeof(ConfigError)))
 	{
@@ -80,8 +81,7 @@ bool Cleaner::SDK_OnLoad(char *error, size_t maxlength, bool late)
 		}
 		return false;
 	}
-
-#if SOURCE_ENGINE >= SE_LEFT4DEAD2
+	
 #ifdef PLATFORM_WINDOWS
 	HMODULE tier0 = GetModuleHandle("tier0.dll");
 	char sig[256];
