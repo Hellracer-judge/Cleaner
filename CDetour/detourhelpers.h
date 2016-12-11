@@ -2,7 +2,7 @@
  * vim: set ts=4 :
  * =============================================================================
  * SourceMod
- * Copyright (C) 2004-2007 AlliedModders LLC.  All rights reserved.
+ * Copyright (C) 2004-2010 AlliedModders LLC.  All rights reserved.
  * =============================================================================
  *
  * This program is free software; you can redistribute it and/or modify it under
@@ -32,9 +32,11 @@
 #ifndef _INCLUDE_SOURCEMOD_DETOURHELPERS_H_
 #define _INCLUDE_SOURCEMOD_DETOURHELPERS_H_
 
-#if defined PLATFORM_LINUX
+#if defined PLATFORM_POSIX
 #include <sys/mman.h>
+#ifndef PAGE_SIZE
 #define	PAGE_SIZE	4096
+#endif
 #define ALIGN(ar) ((long)ar & ~(PAGE_SIZE-1))
 #define	PAGE_EXECUTE_READWRITE	PROT_READ|PROT_WRITE|PROT_EXEC
 #endif
@@ -52,7 +54,7 @@ struct patch_t
 
 inline void ProtectMemory(void *addr, int length, int prot)
 {
-#if defined PLATFORM_LINUX
+#if defined PLATFORM_POSIX
 	void *addr2 = (void *)ALIGN(addr);
 	mprotect(addr2, sysconf(_SC_PAGESIZE), prot);
 #elif defined PLATFORM_WINDOWS
