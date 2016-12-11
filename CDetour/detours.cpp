@@ -2,7 +2,7 @@
 * vim: set ts=4 :
 * =============================================================================
 * SourceMod
-* Copyright (C) 2004-2008 AlliedModders LLC.  All rights reserved.
+* Copyright (C) 2004-2010 AlliedModders LLC.  All rights reserved.
 * =============================================================================
 *
 * This program is free software; you can redistribute it and/or modify it under
@@ -58,9 +58,9 @@ CDetour *CDetourManager::CreateDetour(void *callbackfunction, void **trampoline,
 	return NULL;
 }
 
-CDetour *CDetourManager::CreateDetour(void *callbackfunction, void **trampoline, void *ptr)
+CDetour *CDetourManager::CreateDetour(void *callbackfunction, void **trampoline, void *pAddress)
 {
-	CDetour *detour = new CDetour(callbackfunction, trampoline, ptr);
+	CDetour *detour = new CDetour(callbackfunction, trampoline, pAddress);
 	if (detour)
 	{
 		if (!detour->Init(spengine, gameconf))
@@ -88,13 +88,13 @@ CDetour::CDetour(void *callbackfunction, void **trampoline, const char *signame)
 	this->trampoline = trampoline;
 }
 
-CDetour::CDetour(void *callbackfunction, void **trampoline, void *ptr)
+CDetour::CDetour(void*callbackfunction, void **trampoline, void *pAddress)
 {
 	enabled = false;
 	detoured = false;
-	detour_address = ptr;
+	detour_address = pAddress;
 	detour_trampoline = NULL;
-	this->signame = "";
+	this->signame = NULL;
 	this->detour_callback = callbackfunction;
 	spengine = NULL;
 	gameconf = NULL;
@@ -130,19 +130,21 @@ bool CDetour::IsEnabled()
 
 bool CDetour::CreateDetour()
 {
-	if(gameconf)
+	if (signame && !gameconf->GetMemSig(signame, &detour_address))
 	{
-		if (!gameconf->GetMemSig(signame, &detour_address) && strcmp(signame, "")!=0)
-		{
-			g_pSM->LogError(myself, "Could not locate %s - Disabling detour", signame);
-			return false;
-		}
+		g_pSM->LogError(myself, "Could not locate %s - Disabling detour", signame);
+		return false;
+	}
+	else if(!detour_address)
+	{
+		g_pSM->LogError(myself, "Invalid detour address passed - Disabling detour to prevent crashes");
+		return false;
+	}
 
-		if (!detour_address)
-		{
-			g_pSM->LogError(myself, "Sigscan for %s failed - Disabling detour to prevent crashes", signame);
-			return false;
-		}
+	if (!detour_address)
+	{
+		g_pSM->LogError(myself, "Sigscan for %s failed - Disabling detour to prevent crashes", signame);
+		return false;
 	}
 
 	detour_restore.bytes = copy_bytes((unsigned char *)detour_address, NULL, OP_JMP_SIZE+1);
