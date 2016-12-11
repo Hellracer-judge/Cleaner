@@ -115,9 +115,9 @@ bool Cleaner::SDK_OnLoad(char *error, size_t maxlength, bool late)
 #endif
 
 #if SOURCE_ENGINE >= SE_LEFT4DEAD2
-	g_pDetour = DETOUR_CREATE_MEMBER_PTR(Detour_LogDirect, fn);
+	g_pDetour = DETOUR_CREATE_MEMBER(Detour_LogDirect, fn);
 #else
-	g_pDetour = DETOUR_CREATE_STATIC_PTR(Detour_DefSpew, (gpointer)GetSpewOutputFunc());
+	g_pDetour = DETOUR_CREATE_STATIC(Detour_DefSpew, (gpointer)GetSpewOutputFunc());
 #endif
 	
 	if (g_pDetour == NULL)
