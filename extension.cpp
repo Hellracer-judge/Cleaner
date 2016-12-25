@@ -1,4 +1,3 @@
-#include <sourcemod_version.h>
 #include "extension.h"
 
 IGameConfig *g_pGameConf = NULL;

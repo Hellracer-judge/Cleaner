@@ -40,12 +40,12 @@
 /* Basic information exposed publicly */
 #define SMEXT_CONF_NAME			"Equinox Console Cleaner"
 #define SMEXT_CONF_DESCRIPTION	"Bite me alien boi"
-#define SMEXT_CONF_VERSION		""
+#define SMEXT_CONF_VERSION		"1.0.0"
 #define SMEXT_CONF_AUTHOR		"Zephyrus"
 #define SMEXT_CONF_URL			"http://www.sourcemod.net/"
 #define SMEXT_CONF_LOGTAG		"Cleaner"
 #define SMEXT_CONF_LICENSE		"GPL"
-#define SMEXT_CONF_DATESTRING	""
+#define SMEXT_CONF_DATESTRING	__DATE__
 
 /** 
  * @brief Exposes plugin's main interface.
