@@ -180,7 +180,3 @@ void Cleaner::SDK_OnUnload()
 	gameconfs->CloseGameConfigFile(g_pGameConf);
 #endif
 }
-
-void Cleaner::SDK_OnAllLoaded()
-{
-}
