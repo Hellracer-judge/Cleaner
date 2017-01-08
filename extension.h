@@ -63,7 +63,7 @@ public:
 	 */
 	virtual bool SDK_OnLoad(char *error, size_t maxlength, bool late);
 	virtual void SDK_OnUnload();
-	virtual void SDK_OnAllLoaded();
+	//virtual void SDK_OnAllLoaded();
 public:
 #if defined SMEXT_CONF_METAMOD
 	//virtual bool SDK_OnMetamodLoad(ISmmAPI *ismm, char *error, size_t maxlength, bool late);
