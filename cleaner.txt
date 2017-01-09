@@ -1,21 +1,12 @@
 "Games"
 {
-	"#default"
-	{
-		"Keys"
-		{
-			"ServerConsolePrintSig_windows"			"\x55\x8B\xEC\x83\xE4\xF8\x83\xEC\x14\x8B\x45\x08\x53\x56\x57\x8B\xF9"
-			"ServerConsolePrintSig_linux"			"_ZL12_SpewMessage10SpewType_tPKciPK5ColorS1_Pc"
-			"ServerConsolePrintSig_mac"				"_ZL12_SpewMessage10SpewType_tPKciPK5ColorS1_Pc"
-		}
-	}
 	"left4dead2"
 	{
 		"Keys"
 		{
-			"ServerConsolePrintSig_windows"			"\x55\x8B\xEC\x83\xEC\x08\xE8\x2A\x2A\x2A\x2A\x8B\x48\x08\x89\x0D"
-			"ServerConsolePrintSig_linux"			"_Z17LoggingSystem_Logi17LoggingSeverity_t5ColorPKcz"
-			"ServerConsolePrintSig_mac"				"_Z17LoggingSystem_Logi17LoggingSeverity_t5ColorPKcz"
+			"ServerConsolePrintSig_windows"			"\x55\x8B\xEC\x83\xEC\x1C\xA1\x2A\x2A\x2A\x2A"
+			"ServerConsolePrintSig_linux"			"_ZN14CLoggingSystem9LogDirectEi17LoggingSeverity_t5ColorPKc"
+			"ServerConsolePrintSig_mac"				"_ZN14CLoggingSystem9LogDirectEi17LoggingSeverity_t5ColorPKc"
 		}
 	}
 	"csgo"

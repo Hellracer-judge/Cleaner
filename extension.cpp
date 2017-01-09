@@ -85,13 +85,12 @@ bool Cleaner::SDK_OnLoad(char *error, size_t maxlength, bool late)
 		return false;
 	}
 
-	int lines = 0;
-	char str[255];
-	while(!feof(file))
+	int c, lines = 0;
+	do
 	{
-		fgets(str, 255, file);
+		c = fgetc(file);
 		++lines;
-	}
+	} while (c != EOF);
 
 	rewind(file);
 
@@ -100,13 +99,15 @@ bool Cleaner::SDK_OnLoad(char *error, size_t maxlength, bool late)
 	while(!feof(file))
 	{
 		g_szStrings[g_iStrings] = (char*)malloc(256*sizeof(char*));
-		fgets(g_szStrings[g_iStrings], 255, file);
-		len = strlen(g_szStrings[g_iStrings]);
-		if(g_szStrings[g_iStrings][len-1]=='\r' || g_szStrings[g_iStrings][len-1]=='\n')
-				g_szStrings[g_iStrings][len-1]=0;
-		if(g_szStrings[g_iStrings][len-2]=='\r')
-				g_szStrings[g_iStrings][len-2]=0;
-		++g_iStrings;
+		if (fgets(g_szStrings[g_iStrings], 255, file) != NULL)
+		{
+			len = strlen(g_szStrings[g_iStrings]);
+			if(g_szStrings[g_iStrings][len-1]=='\r' || g_szStrings[g_iStrings][len-1]=='\n')
+					g_szStrings[g_iStrings][len-1]=0;
+			if(g_szStrings[g_iStrings][len-2]=='\r')
+					g_szStrings[g_iStrings][len-2]=0;
+			++g_iStrings;
+		}
 	}
 	fclose(file);
 
@@ -127,7 +128,11 @@ bool Cleaner::SDK_OnLoad(char *error, size_t maxlength, bool late)
 	size_t size = UTIL_StringToSignature(g_pGameConf->GetKeyValue("ServerConsolePrintSig_windows"), sig, sizeof(sig));
 	void * fn = memutils->FindPattern(tier0, sig, size);
 #elif defined PLATFORM_LINUX
+#if SOURCE_ENGINE == SE_LEFT4DEAD2
+	void * tier0 = dlopen("libtier0_srv.so", RTLD_NOW);
+#else
 	void * tier0 = dlopen("libtier0.so", RTLD_NOW);
+#endif
 	void * fn = memutils->ResolveSymbol(tier0, g_pGameConf->GetKeyValue("ServerConsolePrintSig_linux"));
 #elif defined PLATFORM_APPLE
 	void * tier0 = dlopen("libtier0.dylib", RTLD_NOW);

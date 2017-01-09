@@ -43,7 +43,7 @@
 #define SMEXT_CONF_NAME			"Equinox Console Cleaner"
 #define SMEXT_CONF_DESCRIPTION	"Bite me alien boi"
 #define SMEXT_CONF_VERSION		SOURCEMOD_VERSION
-#define SMEXT_CONF_AUTHOR		"Zephyrus"
+#define SMEXT_CONF_AUTHOR		"Zephyrus, Accelerator"
 #define SMEXT_CONF_URL			"http://www.sourcemod.net/"
 #define SMEXT_CONF_LOGTAG		"Cleaner"
 #define SMEXT_CONF_LICENSE		"GPL"
