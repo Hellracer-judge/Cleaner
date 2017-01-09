@@ -7,7 +7,6 @@ Cleaner g_Cleaner;
 SMEXT_LINK(&g_Cleaner);
 
 CDetour *g_pDetour = 0;
-CDetour *g_pPrintf = 0;
 
 char ** g_szStrings;
 int g_iStrings = 0;
