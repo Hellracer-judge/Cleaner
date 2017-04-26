@@ -39,9 +39,6 @@
 
 #include "smsdk_ext.h"
 #include "CDetour/detours.h"
-
-#include "IMemoryUtils.h"
-
 #include <tier0/dbg.h>
 
 typedef void * gpointer;
