@@ -1,7 +1,6 @@
 #include "extension.h"
 
 IGameConfig *g_pGameConf = NULL;
-IMemoryUtils *memutils = NULL;
 
 Cleaner g_Cleaner;
 SMEXT_LINK(&g_Cleaner);
@@ -71,7 +70,6 @@ size_t UTIL_StringToSignature(const char *str, char buffer[], size_t maxlength)
 
 bool Cleaner::SDK_OnLoad(char *error, size_t maxlength, bool late)
 {
-	SM_GET_IFACE(MEMORYUTILS, memutils);
 	CDetourManager::Init(g_pSM->GetScriptingEngine(), 0);
 
 	char szPath[256];
